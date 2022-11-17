@@ -1,4 +1,3 @@
-import 'package:flutter_geolocator_with_stream/repositories/base_geo_repository.dart';
 import 'package:geolocator/geolocator.dart';
 
 ///
@@ -8,12 +7,13 @@ import 'package:geolocator/geolocator.dart';
 ///
 /// Description:
 ///
-class GeoRepository extends BaseGeoRepository {
-  GeoRepository();
+class GeoRepository {
+  final GeolocatorPlatform _geolocator;
 
-  @override
-  Future<Position?> getCurrentLocation() async =>
-      await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
+  const GeoRepository(this._geolocator);
+
+  Stream<Position> getCurrentLocation() => _geolocator.getPositionStream(
+        locationSettings:
+            const LocationSettings(accuracy: LocationAccuracy.high),
       );
 }

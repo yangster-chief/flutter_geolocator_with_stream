@@ -8,4 +8,20 @@ part of 'geolocation_bloc.dart';
 /// Description:
 ///
 
-abstract class GeolocationEvent extends Equatable {}
+abstract class GeolocationEvent extends Equatable {
+  const GeolocationEvent();
+  @override
+  List<Object> get props => [];
+}
+
+class StartGeolocation extends GeolocationEvent {}
+
+class UpdateGeolocation extends GeolocationEvent {
+  final Position position;
+  const UpdateGeolocation(this.position);
+
+  @override
+  List<Object> get props => [position];
+}
+
+class CompleteGeolocation extends GeolocationEvent {}
